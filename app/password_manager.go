@@ -2,7 +2,6 @@ package app
 
 import (
 	"errors"
-	"fmt"
 	"regexp"
 
 	"golang.org/x/crypto/bcrypt"
@@ -40,12 +39,14 @@ func (u *PasswordManager) ValidatePassword(password string) (bool, error) {
 		return false, errors.New("The password can not be greater than 6")
 	} else if matched, _ := regexp.MatchString(`[\n# $&:\n\t]`, password); matched {
 		return false, errors.New("The password can not contain any white space")
-	} else {
-		reg := regexp.MustCompile(`(?m)^(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z])(?=.*\d)(?=.*[!@#\$%\^&\*]).{3,6}$`)
-		if !reg.MatchString(password) {
-			return false, errors.New("The password must contain at least one uppercase and at least one lowercase letter")
-		}
-		fmt.Println("matched")
+	} else if matched, _ := regexp.MatchString(`^.*([a-z]).*$`, password); !matched {
+		return false, errors.New("The password must contain at least one uppercase and at least one lowercase letter")
+	} else if matched, _ := regexp.MatchString(`^.*([A-Z]).*$`, password); !matched {
+		return false, errors.New("The password must contain at least one uppercase and at least one lowercase letter")
+	} else if matched, _ := regexp.MatchString(`^.*([\d]).*$`, password); !matched {
+		return false, errors.New("The password must have at least one digit and symbol")
+	} else if matched, _ := regexp.MatchString(`^.*([!@#\$%\^&]).*$`, password); !matched {
+		return false, errors.New("The password must have at least one digit and symbol")
 	}
 	//} else if matched, _ := regexp.MatchString("(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z])", password); !matched {
 	//	print("matched: ", matched)
