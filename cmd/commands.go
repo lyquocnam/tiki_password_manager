@@ -2,9 +2,9 @@ package cmd
 
 import (
 	"fmt"
+	"github.com/lyquocnam/tiki_password_manager/app"
 	"github.com/spf13/cobra"
 	"log"
-	"tiki/app"
 )
 
 var loginCommand = &cobra.Command{

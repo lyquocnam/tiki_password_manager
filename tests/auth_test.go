@@ -2,7 +2,7 @@ package tests
 
 import (
 	"testing"
-	"tiki/app"
+	"github.com/lyquocnam/tiki_password_manager/app"
 )
 
 func TestLoadData(t *testing.T) {

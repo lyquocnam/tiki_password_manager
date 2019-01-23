@@ -1,9 +1,9 @@
 package main
 
 import (
+	"github.com/lyquocnam/tiki_password_manager/app"
+	"github.com/lyquocnam/tiki_password_manager/cmd"
 	"log"
-	"tiki/app"
-	"tiki/cmd"
 )
 
 func main() {
