@@ -2,25 +2,35 @@ package app
 
 import (
 	"errors"
-	"github.com/alecthomas/gometalinter/_linters/src/gopkg.in/yaml.v2"
+	"gopkg.in/yaml.v2"
 	"io/ioutil"
 	"os"
 )
 
-var FileName = "password.txt"
+var (
+	FileName = "password.txt"
+	DemoUser = "tiki"
+	DemoPassword = "Tik@19"
+)
+
+func RemoveFileIfExist() error {
+	if _, err := os.Stat(FileName); os.IsNotExist(err) {
+		return nil
+	}
+	return os.Remove(FileName)
+}
 
 func LoadDataFromFile() error {
 	// check file exist
-	demoUser := "lynam"
-	demoPassword := "Lyn@m2"
+
 
 	if _, err := os.Stat(FileName); os.IsNotExist(err) {
 		// create new file
 		User = &PasswordManager{
-			Username: demoUser,
+			Username: DemoUser,
 		}
 
-		err := User.Encrypt(demoPassword)
+		err := User.Encrypt(DemoPassword)
 		if err != nil {
 			return err
 		}
@@ -67,6 +77,14 @@ func Login(username string, password string) error {
 }
 
 func CreateUser(username string, password string) error {
+	if len(username) < 3 {
+		return errors.New(`Username can not less than 3`)
+	} else if ok, err := User.ValidatePassword(password); err != nil && !ok {
+		return err
+	} else if username == User.Username {
+		return errors.New(`User already exist`)
+	}
+
 	User = &PasswordManager{
 		Username: username,
 	}
@@ -78,9 +96,14 @@ func CreateUser(username string, password string) error {
 	return SaveToFile()
 }
 
+
 func ChangePassword(password string, newPassword string) error {
 	if !User.VerifyPassword(password) {
-		return errors.New(`Password is not valid`)
+		return errors.New(`Current password is not true`)
+	}
+
+	if _, err := User.ValidatePassword(newPassword); err != nil {
+		return err
 	}
 
 	err := User.Encrypt(newPassword)

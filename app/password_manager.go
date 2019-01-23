@@ -48,12 +48,6 @@ func (u *PasswordManager) ValidatePassword(password string) (bool, error) {
 	} else if matched, _ := regexp.MatchString(`^.*([!@#\$%\^&]).*$`, password); !matched {
 		return false, errors.New("The password must have at least one digit and symbol")
 	}
-	//} else if matched, _ := regexp.MatchString("(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z])", password); !matched {
-	//	print("matched: ", matched)
-	//	return false, errors.New("The password must contain at least one uppercase and at least one lowercase letter")
-	//}
 
 	return true, nil
-	// matched, _ := regexp.MatchString(`^(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z])(?=.*\d)(?=.*[!@#\$%\^&\*]).{3,6}$`, password)
-	// return matched
 }
