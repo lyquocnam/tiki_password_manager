@@ -1,5 +1,5 @@
 ### TIKI Password Management
-[![Build Status](https://travis-ci.com/lyquocnam/tiki_password_manager.svg?branch=master)](https://travis-ci.com/lyquocnam/tiki_password_manager)
+[![Build Status](https://travis-ci.org/lyquocnam/tiki_password_manager.svg?branch=master)](https://travis-ci.org/lyquocnam/tiki_password_manager)
 
 ![Screenshot](https://cdn.pbrd.co/images/HXH8p0Q.png)
 
