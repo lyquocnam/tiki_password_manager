@@ -5,7 +5,7 @@
 
 #### install
 - Download [latest version](https://github.com/lyquocnam/tiki_password_manager/releases)
-- Run in `cmd` on windows or terminal on `mac` and `linux`
+- Run in `cmd` on windows or `terminal` on `mac` and `linux`
 
 #### Document
 ##### Create user
